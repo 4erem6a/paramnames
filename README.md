@@ -31,6 +31,8 @@ console.log(getParameterNames(fn)); // ["a", undefined, "d"]
 ```
 
 ```js
+const getParameterNames = require("paramnames");
+
 const obj = {
   async *fn(a = (1, 2, 3), b = [{}, x => {}], { x, y: { z } }, ...rest) {}
 };
