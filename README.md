@@ -4,6 +4,8 @@ Returns function parameter names using the acorn parser, thus slower than regex 
 Works with all kinds of functions and parameters.
 Deconstructed parameter names are undefined.
 
+[![npm version](https://badge.fury.io/js/paramnames.svg)](https://badge.fury.io/js/paramnames)
+
 # API
 
 ```ts
