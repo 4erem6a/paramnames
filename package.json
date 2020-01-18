@@ -10,6 +10,10 @@
   },
   "author": "4erem6a",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4erem6a/paramnames.git"
+  },
   "dependencies": {
     "acorn": "^7.1.0"
   },
