@@ -1,0 +1,19 @@
+{
+  "name": "paramnames",
+  "version": "1.0.0",
+  "description": "Returns function parameter names.",
+  "main": "src/index.js",
+  "types": "./types",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "prepublishOnly": "yarn test"
+  },
+  "author": "4erem6a",
+  "license": "MIT",
+  "dependencies": {
+    "acorn": "^7.1.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
