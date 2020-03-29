@@ -1,6 +1,11 @@
+const isNative = require("./isNative");
 const { parse, isIdentifierChar } = require("acorn");
 
 function parseFunction(fn) {
+  if (isNative(fn)) {
+    return undefined;
+  }
+
   const source = fn
     .toString()
     .replace(/^async/, "")
