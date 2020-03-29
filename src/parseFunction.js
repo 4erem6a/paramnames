@@ -26,6 +26,11 @@ function parseFunction(fn) {
     return parse(source).body[0].expression;
   }
 
+  if (/^\[/.test(source)) {
+    // [...]() => {}
+    return parse(`({ ${source} })`).body[0].expression.properties[0].value;
+  }
+
   let position = 1;
 
   while (isIdentifierChar(source.charCodeAt(position))) {
