@@ -15,6 +15,8 @@ getParameterNames(fn: Function): Array<string | undefined>
 
 ## Useful information
 
+Returns `undefined` if the argument is not a function.
+
 Deconstructed parameter names are `undefined`.
 
 Native function's parameter names are `[]`.
