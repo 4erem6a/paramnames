@@ -1,5 +1,5 @@
 function isNative(fn) {
-  return fn.toString() == "function () { [native code] }";
+  return /^function.+\{\s*\[\s*native code\s*\]\s*\}$/.test(fn.toString());
 }
 
 module.exports = isNative;
