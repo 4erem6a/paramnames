@@ -1,25 +1,22 @@
+const isClass = require("./isClass");
+const findConstructor = require("./findConstructor");
 const parseFunction = require("./parseFunction");
+const getParameterNames = require("./getParameterNames");
 
-function getParameterNames(fn) {
+function parseAndGetParameterNames(fn) {
   if (typeof fn != "function") {
     return undefined;
   }
 
-  const params = parseFunction(fn).params;
+  if (isClass(fn)) {
+    const constructor = findConstructor(fn);
 
-  return params
-    .map(param => {
-      if (param.type == "AssignmentPattern") {
-        return param.left;
-      }
+    return (constructor && getParameterNames(constructor)) || [];
+  }
 
-      if (param.type == "RestElement") {
-        return param.argument;
-      }
+  const parsedFn = parseFunction(fn);
 
-      return param;
-    })
-    .map(param => param.name);
+  return parsedFn && getParameterNames(parsedFn);
 }
 
-module.exports = getParameterNames;
+module.exports = parseAndGetParameterNames;
