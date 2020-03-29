@@ -3,7 +3,7 @@ const { parse, isIdentifierChar } = require("acorn");
 
 function parseFunction(fn) {
   if (isNative(fn)) {
-    return undefined;
+    return [];
   }
 
   const source = fn
