@@ -26,8 +26,8 @@ function parseFunction(fn) {
     return parse(source).body[0].expression;
   }
 
-  if (/^\[/.test(source)) {
-    // [...]() => {}
+  if (/^(?:\[|\"|\')/.test(source)) {
+    // [...]() => {} | "..."() => {} | '...'() => {}
     return parse(`({ ${source} })`).body[0].expression.properties[0].value;
   }
 
