@@ -1,3 +1,4 @@
+const isNative = require("./isNative");
 const isClass = require("./isClass");
 const findConstructor = require("./findConstructor");
 const parseFunction = require("./parseFunction");
@@ -6,6 +7,10 @@ const getParameterNames = require("./getParameterNames");
 function parseAndGetParameterNames(fn) {
   if (typeof fn != "function") {
     return undefined;
+  }
+
+  if (isNative(fn)) {
+    return [];
   }
 
   if (isClass(fn)) {
