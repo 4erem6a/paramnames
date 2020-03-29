@@ -1,7 +1,9 @@
 const { parse } = require("acorn");
 
 function getConstructor(_class) {
-  return _class.body.body.find(member => member.kind == "constructor");
+  const constructor = _class.body.body.find(member => member.kind == "constructor");
+
+  return constructor && constructor.value;
 }
 
 function parseConstructor(_class) {
