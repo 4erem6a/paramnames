@@ -18,8 +18,14 @@ function parseFunction(fn) {
   }
 
   if (/^\(/.test(source)) {
-    // () => {}
-    return parse(source).body[0].expression;
+    try {
+      // () => {}
+      return parse(source).body[0].expression;
+    } catch {
+      // async() {}
+      // FIXME: Implement this without try/catch.
+      return parse(`({ async ${source} })`).body[0].expression.properties[0].value;
+    }
   }
 
   if (/^(?:\[|\"|\')/.test(source)) {
