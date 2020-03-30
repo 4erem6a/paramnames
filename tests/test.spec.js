@@ -11,13 +11,7 @@ expect.extend({
 });
 
 test("Plain function", () => {
-  async function f(
-    a,
-    b = (1, 2, 3),
-    [x, y, z],
-    c = [{}, (a, b, c) => {}],
-    ...rest
-  ) {}
+  async function f(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
 
   expect(f).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
 });
@@ -35,13 +29,7 @@ test("Anonymous function", () => {
 });
 
 test("Arrow function", () => {
-  const f = async (
-    a,
-    b = (1, 2, 3),
-    [x, y, z],
-    c = [{}, (a, b, c) => {}],
-    ...rest
-  ) => {};
+  const f = async (a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) => {};
 
   expect(f).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
 });
@@ -54,26 +42,14 @@ test("Single argument arrow function", () => {
 
 test("Method", () => {
   const obj = {
-    async f(
-      a,
-      b = (1, 2, 3),
-      [x, y, z],
-      c = [{}, (a, b, c) => {}],
-      ...rest
-    ) {}
+    async f(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
   };
 
   expect(obj.f).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
 });
 
 test("Plain generator", () => {
-  async function* f(
-    a,
-    b = (1, 2, 3),
-    [x, y, z],
-    c = [{}, (a, b, c) => {}],
-    ...rest
-  ) {}
+  async function* f(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
 
   expect(f).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
 });
@@ -106,13 +82,7 @@ test("Generator method", () => {
 
 test("Generator method (string literal name)", () => {
   const obj = {
-    async *"f"(
-      a,
-      b = (1, 2, 3),
-      [x, y, z],
-      c = [{}, (a, b, c) => {}],
-      ...rest
-    ) {}
+    async *f(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
   };
 
   expect(obj.f).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
@@ -137,12 +107,7 @@ test("Generator method (computed name)", () => {
 
 test("Class constructor", () => {
   class Sample {
-    constructor(
-      a,
-      b = (1, 2, 3),
-      [x, y, z],
-      c = [{}, (a, b, c) => {}],
-      ...rest) {}
+    constructor(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
   }
 
   expect(Sample).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
@@ -156,19 +121,14 @@ test("Class without constructor", () => {
 
 test("Anonymous class", () => {
   const Sample = class {
-    constructor(
-      a,
-      b = (1, 2, 3),
-      [x, y, z],
-      c = [{}, (a, b, c) => {}],
-      ...rest) {}
-  }
+    constructor(a, b = (1, 2, 3), [x, y, z], c = [{}, (a, b, c) => {}], ...rest) {}
+  };
 
   expect(Sample).toHaveParameterNames(["a", "b", undefined, "c", "rest"]);
 });
 
 test("Anonymous class without constructor", () => {
-  const Sample = class {}
+  const Sample = class {};
 
   expect(Sample).toHaveParameterNames([]);
 });
@@ -213,4 +173,12 @@ test("Native functions", () => {
   expect(String).toHaveParameterNames([]);
 
   expect(Proxy).toHaveParameterNames([]);
+});
+
+test("'async' method", () => {
+  const fn = {
+    async(a, b) {}
+  }.async;
+
+  expect(fn).toHaveParameterNames(["a", "b"]);
 });
